@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas</title>
+</head>
+<body style="height: 100%">
+    <canvas id="canvas" height="500" width="500" ></canvas>
+
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx =canvas.getContext("2d");
+        
+        var circle = function(x,y,radius,color,fillCircle){
+            ctx.beginPath();
+            ctx.arc(x,y,radius,0,Math.PI * 2,false);
+            ctx.strokeStyle = color;
+            if(fillCircle){
+                ctx.fillStyle = color;
+                ctx.fill();
+            }else{        
+                ctx.stroke();
+            };    
+        };
+        circle(250,50,30,"black",false);
+        circle(250,130,50,"black",false);
+        circle(240,50,5,"black",true);
+        circle(260,50,5,"black",true);
+        circle(250,55,5,"orange",true);
+        circle(250,110,5,"black",true);
+
+    </script>
+</body>
+</html>

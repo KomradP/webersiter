@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Приыгающий мяч</title>
+</head>
+<body>
+    <canvas id="canvas" height="500" width="300"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        
+        var width =canvas.width;
+        var height = canvas.height;
+        var moreBall = [];
+        
+        
+        //Обьект "Мяч";
+        var Ball = function() {
+            this.x =100;
+            this.y =100;
+            this.xSpeed = 0;
+            this.ySpeed = 0;
+        }
+        //Метод отрисовки мяча на плоскасти с помощью фунции circle.
+        var circle =function(x,y,radius,fillCircle){
+            ctx.beginPath();
+            ctx.arc(x,y,radius,0,Math.PI * 2, false);
+            if(fillCircle){
+                ctx.fill();
+            }else{
+                ctx.stroke();
+            }
+        };
+        Ball.prototype.draw=function(){
+            circle(this.x,this.y,3,true);
+        };
+        //метод движения мяча по "холсту"
+        Ball.prototype.move = function(){
+            this.x += this.xSpeed;
+            this.y += this.ySpeed;
+        };
+        //Метод проверки на столкновение с границими холста.
+        Ball.prototype.checkCollision = function(){
+            if(this.x < 0 || this.x > width){
+                this.xSpeed = -this.xSpeed;
+            }
+            if(this.y < 0 || this.y > height){
+                this.ySpeed = -this.ySpeed;
+            }
+        };
+
+        var ball =new Ball();
+        setInterval(function(){
+            ctx.clearRect(0,0,width,height);
+            for(i = 0; i < 10; i++){
+            moreBall[i]=new Ball();
+            ball.draw();
+            ball.move();
+            ball.checkCollision();
+        };
+            ctx.LineWidth =4;
+            ctx.strokeRect(0,0,width,height);
+
+        },30);
+
+        
+            
+            
+        
+    </script>
+</body>
+</html>
